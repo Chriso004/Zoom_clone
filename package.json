@@ -5,7 +5,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "dev": "nodemon"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.5",
+    "@babel/node": "^7.18.5",
     "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "express": "^4.18.1",
+    "pug": "^3.0.2"
   }
 }
