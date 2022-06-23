@@ -20,11 +20,10 @@ const sockets = []
 // socket은 서버와 연결된 브라우저
 wsServer.on("connection", (socket) => {
     sockets.push(socket);
-    console.log(socket);
     console.log("connected");
     socket.on("message", (message) => {
-        sockets.forEach((temp) => temp.send(message.toString()));
+        sockets.forEach((aSocket) => aSocket.send(message.toString()));
     })
 });
 
-server.listen(3000, handleListen)
+server.listen(3000, handleListen);

@@ -15,15 +15,15 @@ socket.addEventListener("close", () => {
 })
 
 socket.addEventListener("message", (message) => {
+    const newMsg = document.createElement("li");
+    newMsg.innerText = message.data;
+    messageList.append(newMsg);
     console.log(`from server : ${message.data}`);
 })
 
 function handleSubmit(event) {
     event.preventDefault();
-    const input = document.getElementById("msg_input");
-    const output = document.getElementById("msg_output");
-
-    output.value = input.value;
+    const input = messageForm.querySelector("input");
     socket.send(input.value);
     input.value = "";
 }
