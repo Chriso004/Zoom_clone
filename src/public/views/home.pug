@@ -10,5 +10,10 @@ html(lang="en")
         header
             h1 this is header
         main
-            button button
-        script(src="/public/js/app.js")
+            ul
+            form
+                input(type="text", id="msg_input", placeholder="write a msg", required)
+                input(type="text", id="msg_output", readonly)
+                button Send
+
+    script(src="/public/js/app.js")
