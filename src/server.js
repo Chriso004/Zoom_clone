@@ -21,8 +21,20 @@ const sockets = []
 wsServer.on("connection", (socket) => {
     sockets.push(socket);
     console.log("connected");
+    socket.on("close", () => {
+        console.log("disconnected");
+    })
     socket.on("message", (message) => {
-        sockets.forEach((aSocket) => aSocket.send(message.toString()));
+        const parse = JSON.parse(message);
+        switch(parse.type) {
+            case "message":
+                sockets.forEach((aSocket) => 
+                    aSocket.send(`${ socket.nickname }: ${ parse.payload }`));
+                break;
+            case "nickname":
+                socket["nickname"] = parse.payload;
+                break;
+        }   
     })
 });
 
