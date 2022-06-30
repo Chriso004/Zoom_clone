@@ -8,13 +8,11 @@ html(lang="en")
         link(rel="stylesheet", href="/public/css/mvp.css")
     body 
         header
-            h1 this is header
+            h1 Header
         main
-            form#nickname
-                input(type="text", id="msg_input", placeholder="write a nickname", required)
-                button Save
-            form#message(style="display:none")
-                input(type="text", id="msg_input", placeholder="write a msg", required)
-                button Send
-            ul
+            div#room
+                form
+                    input(placeholder="room name", required, type="text")
+                    button Enter Room
+    script(src="/socket.io/socket.io.js")       
     script(src="/public/js/app.js")

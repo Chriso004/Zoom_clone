@@ -1,5 +1,5 @@
 import http from "http";
-import WebSocket from "ws";
+import { Server } from "socket.io";
 import express from "express";
 
 const app = express();
@@ -10,32 +10,13 @@ app.use("/public", express.static(__dirname + "/public"));
 app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 
-const handleListen = () => console.log(`listening on http://localhost:3000`);
+const httpServer = http.createServer(app);
+const wsServer = new Server(httpServer);
 
-const server = http.createServer(app);
-const wsServer = new WebSocket.Server( {server} );
-
-const sockets = []
-
-// socket은 서버와 연결된 브라우저
 wsServer.on("connection", (socket) => {
-    sockets.push(socket);
-    console.log("connected");
-    socket.on("close", () => {
-        console.log("disconnected");
-    })
-    socket.on("message", (message) => {
-        const parse = JSON.parse(message);
-        switch(parse.type) {
-            case "message":
-                sockets.forEach((aSocket) => 
-                    aSocket.send(`${ socket.nickname }: ${ parse.payload }`));
-                break;
-            case "nickname":
-                socket["nickname"] = parse.payload;
-                break;
-        }   
-    })
+    socket.on("enter_room", (msg) => console.log(msg));
 });
 
-server.listen(3000, handleListen);
+
+const handleListen = () => console.log(`Listening on http://localhost:3000`);
+httpServer.listen(3000, handleListen);
