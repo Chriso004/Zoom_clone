@@ -30,4 +30,8 @@ socket.on("welcome", () => {
     addMessage("Someone Join!");
 });
 
+socket.on("bye", () => {
+    addMessage("someone left.");
+});
+
 form.addEventListener("submit", handleRoomSubmit);
