@@ -14,7 +14,10 @@ const httpServer = http.createServer(app);
 const wsServer = new Server(httpServer);
 
 wsServer.on("connection", (socket) => {
-    socket.on("enter_room", (msg) => console.log(msg));
+    socket.on("enter_room", (roomName, req) => {
+        socket.join(roomName);
+        req();
+    })
 });
 
 
